@@ -49,12 +49,12 @@ Data Retrieval:
 To retrieve data from the database, use the get(key) function. It returns the value associated with the specified key.
 
 const name = db.get('name');
-console.log(name); // Output: John Doe
+console.log(name); // Output: Özcan Kasapoğlu
 
 Data Update:
 To update data in the database, use the set(key, value) function. It works similarly to the data storage operation but with an existing key.
 
-db.set('age', 30);
+db.set('age', 18);
 
 Data Deletion:
 To delete data from the database, use the remove(key) function. It removes the key-value pair associated with the specified key.
@@ -65,7 +65,7 @@ All Data Retrieval:
 To retrieve all data stored in the database, use the getAll() function. It returns an object containing all the key-value pairs.
 
 const allData = db.getAll();
-console.log(allData); // Output: { name: 'John Doe', age: 30 }
+console.log(allData); // Output: { name: 'Özcan Kasapoğlu', age: 18 }
 
 Database Size:
 To get the number of key-value pairs stored in the database, use the size() function. It returns the size of the database.
