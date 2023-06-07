@@ -1,0 +1,35 @@
+{
+  "name": "gyo.db",
+  "version": "1.0.2",
+  "description": "Lightweight Node.js module for managing JSON-based databases",
+  "keywords": [
+    "node",
+    "npm",
+    "module",
+    "database",
+    "JSON",
+    "lightweight",
+    "data storage",
+    "data management",
+    "CRUD",
+    "persistent storage"
+  ],
+  "author": "Ozjan GYO",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^x.x.x",
+    "fs": "^x.x.x",
+    "gyo.db": "^1.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ozcangyo/gyo.db"
+  },
+  "homepage": "https://github.com/ozcangyo/gyo.db#readme",
+  "bugs": {
+    "url": "https://github.com/ozcangyo/gyo.db/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
