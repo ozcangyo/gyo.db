@@ -25,61 +25,117 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 ## Support:
 For bug reports, feature requests, or any other questions related to gyo.db, please use the [issue tracker](https://github.com/ozcangyo/gyo.db/issues) on GitHub.
 
+
 ## Usage
 
-gyo.db is a lightweight Node.js module for managing JSON-based databases. It provides a simple and intuitive API for storing, retrieving, updating, and deleting data using a JSON file as the database storage.
-
-### Initialization:
-To get started, require the 'gyo.db' module and create a new instance of the GyoDB class, specifying the JSON file to be used as the database storage.
+Here is an example of how to use GyoDB in your Node.js application:
 
 ```javascript
-const GyoDB = require('gyo.db');
+const GyoDB = require('gyodb');
 
-const db = new GyoDB('database.json');
-```
-### Data Storage:
-To store data in the database, use the set(key, value) function. It allows you to set a key-value pair, where the key is a string and the value can be any valid JSON data type.
+// Create an instance of GyoDB with the path to your JSON database file
+const db = new GyoDB('data.json');
 
-```javascript
+// Set a value
 db.set('name', 'Özcan Kasapoğlu');
-db.set('age', 18);
-db.set('email', 'ozjangyo@gmail.com');
-```
-### Data Retrieval:
-To retrieve data from the database, use the `get(key)` function. It returns the value associated with the specified key.
 
-```javascript
+// Get a value
 const name = db.get('name');
 console.log(name); // Output: Özcan Kasapoğlu
-```
-### Data Update:
-To update data in the database, use the `set(key, value)` function. It works similarly to the data storage operation but with an existing key.
 
-```javascript
-db.set('age', 18);
-```
-### Data Deletion:
-To delete data from the database, use the `remove(key)` function. It removes the key-value pair associated with the specified key.
-```javascript
-db.remove('email');
-```
-### All Data Retrieval:
-To retrieve all data stored in the database, use the `getAll()` function. It returns an object containing all the key-value pairs.
+// Check if a key exists
+const exists = db.has('name');
+console.log(exists); // Output: true
 
-```javascript
-const allData = db.getAll();
-console.log(allData); // Output: { name: 'Özcan Kasapoğlu', age: 18 }
-```
-### Database Size:
-To get the number of key-value pairs stored in the database, use the size() function. It returns the size of the database.
+// Remove a key-value pair
+db.remove('name');
 
-```javascript
+// Clear the entire database
+db.clear();
+
+// Get the size of the database
 const size = db.size();
-console.log(size); // Output: 2
-```
-### Web API Server:
-If you want to expose the data stored in the database through a Web API, you can start a Web API server using the `startWebAPI(port)` function. It starts an Express server that listens on the specified port and serves the data as JSON over HTTP.
+console.log(size); // Output: 0
 
-```javascript
+// Search for values that include a specific query
+const results = db.search('apple');
+console.log(results); // Output: { fruit: 'apple', color: 'red' }
+
+// Update a value using a custom update function
+db.update('count', value => value + 1);
+
+// Get the key(s) associated with a specific value
+const key = db.getKeyByValue('Özcan Kasapoğlu');
+console.log(key); // Output: name
+
+const keys = db.getKeysByValue('apple');
+console.log(keys); // Output: [ 'fruit' ]
+
+// Merge an object into the database
+db.merge({ city: 'New York', country: 'USA' });
+
+// Validate a value using a custom validation function
+const isValid = db.validate('age', value => value >= 18);
+console.log(isValid); // Output: true
+
+// Export the database to a JSON file
+db.exportDatabase('backup.json');
+
+// Start a web API server to expose the database data
 db.startWebAPI(3000);
 ```
+# Api
+
+`new GyoDB(dbFilePath)`
+Creates a new instance of GyoDB with the specified JSON database file path.
+
+`loadDatabase()`
+Loads the JSON database file and returns its contents as an object. If the file does not exist or is empty, an empty object `{}` is returned.
+
+`saveDatabase()`
+Saves the current state of the database to the JSON file.
+
+`get(key)`
+Retrieves the value associated with the specified key.
+
+`set(key, value)`
+Sets the value of the specified key.
+
+`has(key)`
+Checks if the specified key exists in the database.
+
+`remove(key)`
+Removes the key-value pair associated with the specified key.
+
+`clear()`
+Clears the entire database.
+
+`getAll()`
+Returns the entire database as an object.
+
+`size()`
+Returns the number of key-value pairs in the database.
+
+`search(query)`
+Searches for values that include the specified query and returns an object with matching key-value pairs.
+
+`update(key, updateFn)`
+Updates the value associated with the specified key using a custom update function. The update function receives the current value as a parameter and should return the updated value.
+
+`getKeyByValue(value)`
+Returns the key associated with the specified value. If multiple keys have the same value, only the first occurrence is returned.
+
+`getKeysByValue(value)`
+Returns an array of keys associated with the specified value.
+
+`merge(dataObject)`
+Merges the specified object into the database.
+
+`validate(key, validationFn)`
+Validates the value associated with the specified key using a custom validation function. The validation function receives the value as a parameter and should return a boolean value indicating whether the value is valid or not.
+
+`exportDatabase(exportFilePath)`
+Exports the current state of the database to a JSON file at the specified path.
+
+`startWebAPI(port)`
+Starts a web API server to expose the database data. The server listens on the specified port and provides a JSON API endpoint at /api/data to retrieve the database contents.

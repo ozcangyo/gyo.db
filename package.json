@@ -1,6 +1,6 @@
 {
   "name": "gyo.db",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Lightweight Node.js module for managing JSON-based databases",
   "keywords": [
     "node",
@@ -19,7 +19,7 @@
   "dependencies": {
     "express": "^x.x.x",
     "fs": "^x.x.x",
-    "gyo.db": "^1.0.2"
+    "gyo.db": "^1.0.4"
   },
   "repository": {
     "type": "git",
